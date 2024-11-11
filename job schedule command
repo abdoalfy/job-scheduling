@@ -1,0 +1,26 @@
+1- php artisan make:command emails 
+
+2- in the file handel the name of the command 
+    protected $signature = 'users:sendemails';
+
+3-handel describtion
+    protected $description = 'send active  users emails in specific time';
+  
+
+4-in the handel function 
+    public function handle()
+    {
+        $users =User::where('status','active')->get();
+        foreach($users as $user){
+            Mail::to($user->email)->send(new Testmail());
+        }
+    }
+
+5- in the kernal file in the command folder declare the command with the specific time :
+    protected function schedule(Schedule $schedule): void
+    {
+        $schedule->command('users:sendemails')->everyMinute();
+    }
+
+6- run this command 
+php artisan schedule:run 
