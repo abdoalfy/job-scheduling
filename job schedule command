@@ -22,5 +22,8 @@
         $schedule->command('users:sendemails')->everyMinute();
     }
 
-6- run this command 
+6- run this command    //run without waiting the time you assign in the kernal for this shedule
 php artisan schedule:run 
+
+7- run this command //respect the time you put in the kernal
+php artisan schedule:work
